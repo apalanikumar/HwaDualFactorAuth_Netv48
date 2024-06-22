@@ -50,6 +50,7 @@ namespace HwaDualFactorAuth_Netv48
             }
             catch (Exception ex)
             {
+                lbl_alert.Visible = true;
                 lbl_alert.Text = ex.Message.ToString();
             }            
         }
