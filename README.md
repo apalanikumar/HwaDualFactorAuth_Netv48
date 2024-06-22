@@ -1,4 +1,4 @@
-This application is using the demonstrate the Two Factor Authentication by ASP.NET v4.8 framework
+This application is using to demonstrate the Two Factor Authentication by ASP.NET v4.8 framework<br/>
 Technology stack: <br/>
   Visual Studio 2022 Professional<br/>
   ASP.NET and C#<br/>
