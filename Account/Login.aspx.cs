@@ -5,6 +5,15 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
 using HwaDualFactorAuth_Netv48.Models;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Text;
+using System.Collections.Generic;
+using Microsoft.Owin.Security.Twitter.Messages;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Web.Services.Description;
+using System.Net.Http.Headers;
 
 namespace HwaDualFactorAuth_Netv48.Account
 {
@@ -26,7 +35,7 @@ namespace HwaDualFactorAuth_Netv48.Account
         protected void LogIn(object sender, EventArgs e)
         {
             if (IsValid)
-            {
+            {                
                 // Validate the user password
                 var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
@@ -44,7 +53,7 @@ namespace HwaDualFactorAuth_Netv48.Account
                         Response.Redirect("/Account/Lockout");
                         break;
                     case SignInStatus.RequiresVerification:
-                        Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}", 
+                        Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}",
                                                         Request.QueryString["ReturnUrl"],
                                                         RememberMe.Checked),
                                           true);

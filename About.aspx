@@ -3,7 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title">
         <h2 id="title"><%: Title %>.</h2>
-        <h3>Your application description page.</h3>
-        <p>Use this area to provide additional information.</p>
+        <strong>Support:</strong>   <a href="http://localhost:59921/swagger/index.html">Support@example.com</a><br />
+        <asp:HyperLink ID="link" runat="server" Text="http://localhost:59921/swagger/index.html"></asp:HyperLink>
     </main>
 </asp:Content>

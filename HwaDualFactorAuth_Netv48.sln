@@ -5,8 +5,6 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HwaDualFactorAuth_Netv48", "HwaDualFactorAuth_Netv48.csproj", "{1AAD4CE2-2CC2-4C7B-AD74-F78601C119CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HwaDualFactorAuth_Api", "..\HwaDualFactorAuth_Api\HwaDualFactorAuth_Api.csproj", "{3B54B08E-91C2-4FC2-A334-93B2F8D64734}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,14 +15,6 @@ Global
 		{1AAD4CE2-2CC2-4C7B-AD74-F78601C119CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AAD4CE2-2CC2-4C7B-AD74-F78601C119CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AAD4CE2-2CC2-4C7B-AD74-F78601C119CB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E875B69-4AF6-49F0-86AC-5C474E7227D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E875B69-4AF6-49F0-86AC-5C474E7227D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E875B69-4AF6-49F0-86AC-5C474E7227D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E875B69-4AF6-49F0-86AC-5C474E7227D3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3B54B08E-91C2-4FC2-A334-93B2F8D64734}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B54B08E-91C2-4FC2-A334-93B2F8D64734}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3B54B08E-91C2-4FC2-A334-93B2F8D64734}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3B54B08E-91C2-4FC2-A334-93B2F8D64734}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

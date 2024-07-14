@@ -9,6 +9,17 @@ using System.Net;
 using System.Web.Script.Serialization;
 using System.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using System.IO;
+using System.Text;
+using System.IdentityModel.Tokens.Jwt;
+using Newtonsoft.Json.Linq;
+using System.Text.Json;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace HwaDualFactorAuth_Netv48
 {
@@ -16,75 +27,42 @@ namespace HwaDualFactorAuth_Netv48
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //if (!this.IsPostBack)
+            //{
+            //    this.BindGrid();
+            //}
         }
-        protected void GetWeatherInfo(object sender, EventArgs e)
-        {
-            if (txtCity.Text.Trim().Length == 0 || txtCity.Text.IsNullOrEmpty())
-            {
-                lbl_alert.Visible = true;
-                lbl_alert.Text = "Please enter the city name and then proceed...";
-                return;
-            }
-            try
-            {
-                string appId = ConfigurationManager.AppSettings["WeatherInfoKey"];
-                string url = string.Format("http://api.openweathermap.org/data/2.5/forecast/daily?q={0}&units=metric&cnt=1&APPID={1}", txtCity.Text.Trim(), appId);
-                using (WebClient client = new WebClient())
-                {
-                    string json = client.DownloadString(url);
 
-                    WeatherInfo1 weatherInfo = (new JavaScriptSerializer()).Deserialize<WeatherInfo1>(json);
-                    lblCity_Country.Text = weatherInfo.city.name + "," + weatherInfo.city.country;
-                    imgCountryFlag.ImageUrl = string.Format("http://openweathermap.org/images/flags/{0}.png", weatherInfo.city.country.ToLower());
-                    lblDescription.Text = weatherInfo.list[0].weather[0].description;
-                    imgWeatherIcon.ImageUrl = string.Format("http://openweathermap.org/img/w/{0}.png", weatherInfo.list[0].weather[0].icon);
-                    lblTempMin.Text = string.Format("{0}°С", Math.Round(weatherInfo.list[0].temp.min, 1));
-                    lblTempMax.Text = string.Format("{0}°С", Math.Round(weatherInfo.list[0].temp.max, 1));
-                    lblTempDay.Text = string.Format("{0}°С", Math.Round(weatherInfo.list[0].temp.day, 1));
-                    lblTempNight.Text = string.Format("{0}°С", Math.Round(weatherInfo.list[0].temp.night, 1));
-                    lblHumidity.Text = weatherInfo.list[0].humidity.ToString();
-                    tblWeather.Visible = true;
-                    lbl_alert.Visible = false;
+        private void BindGrid()
+        {
+            string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT Id, Email, PhoneNumber, Username FROM AspNetUsers"))
+                {
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        cmd.Connection = con;
+                        sda.SelectCommand = cmd;
+                        using (DataTable dt = new DataTable())
+                        {
+                            sda.Fill(dt);
+                            GridView1.DataSource = dt;
+                            GridView1.DataBind();
+                        }
+                    }
                 }
             }
-            catch (Exception ex)
-            {
-                lbl_alert.Visible = true;
-                lbl_alert.Text = ex.Message.ToString();
-            }            
         }
-        public class WeatherInfo1
+        protected void OnPageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            public City city { get; set; }
-            public List<List> list { get; set; }
+            GridView1.PageIndex = e.NewPageIndex;
+            this.BindGrid();
         }
+        protected void DataLoad_Click(object sender, EventArgs e)
+        {           
+            BindGrid();
 
-        public class City
-        {
-            public string name { get; set; }
-            public string country { get; set; }
-        }
-
-        public class Temp
-        {
-            public double day { get; set; }
-            public double min { get; set; }
-            public double max { get; set; }
-            public double night { get; set; }
-        }
-
-        public class Weather
-        {
-            public string description { get; set; }
-            public string icon { get; set; }
-        }
-
-        public class List
-        {
-            public Temp temp { get; set; }
-            public int humidity { get; set; }
-            public List<Weather> weather { get; set; }
         }
     }
 }

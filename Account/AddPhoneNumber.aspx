@@ -10,11 +10,13 @@
             <asp:Literal runat="server" ID="ErrorMessage" />
         </p>
         <div class="row">
-            <asp:Label runat="server" AssociatedControlID="PhoneNumber" CssClass="col-md-2 col-form-label">Phone Number</asp:Label>
+            <asp:Label runat="server" AssociatedControlID="PhoneNumber" CssClass="col-md-2 col-form-label"> Select Country Code with Phone Number</asp:Label>
             <div class="col-md-10">
-                <asp:TextBox runat="server" ID="PhoneNumber" CssClass="form-control" TextMode="Phone" />
+                <asp:DropDownList ID="ddlCountry" runat="server" CssClass="form-control" Width ="25%" ></asp:DropDownList>
+                <asp:TextBox runat="server" ID="PhoneNumber" CssClass="form-control" MaxLength="15" TextMode="Phone" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="PhoneNumber"
-                    CssClass="text-danger" ErrorMessage="The PhoneNumber field is required." />
+                    CssClass="text-danger" ValidationExpression="^\s*\+?[0-9]\d?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$" ErrorMessage="The PhoneNumber field is required." />
+                <asp:Label ID="lblphone" runat="server" Visible ="false" ForeColor="Red" Text =""></asp:Label>
             </div>
         </div>
         <div class="form-group">

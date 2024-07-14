@@ -11,7 +11,7 @@ namespace HwaDualFactorAuth_Netv48
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //Response.Redirect("http://localhost:59921/swagger/index.html",false);
         }
     }
 }
